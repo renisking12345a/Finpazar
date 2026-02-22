@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import './MyRequestsPage.css';
 
 const MyRequestsPage = () => {
@@ -14,13 +14,10 @@ const MyRequestsPage = () => {
   const fetchMyRequests = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
       const userId = JSON.parse(localStorage.getItem('user')).id;
       
       // Get all requests and filter by customer
-      const response = await axios.get('/api/requests', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.get('/requests');
       
       // Filter requests for current user
       const myRequests = response.data.filter(req => req.customerId?.id === userId || req.email === JSON.parse(localStorage.getItem('user')).email);

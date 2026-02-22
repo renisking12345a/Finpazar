@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import './AdminDashboard.css';
 
 const AdminDashboard = () => {
@@ -15,10 +15,7 @@ const AdminDashboard = () => {
   const fetchRequests = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem('token');
-      const response = await axios.get('/api/requests', {
-        headers: { Authorization: `Bearer ${token}` }
-      });
+      const response = await api.get('/requests');
       setRequests(response.data);
     } catch (error) {
       console.error('Error fetching requests:', error);
@@ -137,16 +134,12 @@ const RequestDetailModal = ({ request, onClose, onRefresh }) => {
     }
 
     try {
-      const token = localStorage.getItem('token');
-      await axios.put(
-        `/api/requests/${request._id}/schedule`,
+      await api.put(
+        `/requests/${request._id}/schedule`,
         {
           scheduledDate,
           scheduledTime,
           notes
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` }
         }
       );
       setSuccessMessage('Meeting scheduled successfully!');
@@ -165,15 +158,11 @@ const RequestDetailModal = ({ request, onClose, onRefresh }) => {
     setSuccessMessage('');
 
     try {
-      const token = localStorage.getItem('token');
-      await axios.put(
-        `/api/requests/${request._id}/status`,
+      await api.put(
+        `/requests/${request._id}/status`,
         {
           status,
           notes
-        },
-        {
-          headers: { Authorization: `Bearer ${token}` }
         }
       );
       setSuccessMessage('Status updated successfully!');

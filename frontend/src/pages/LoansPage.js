@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import api from '../api';
 import { useAuth } from '../context/AuthContext';
 import './LoansPage.css';
 
@@ -17,7 +17,7 @@ const LoansPage = () => {
   const fetchLoans = async () => {
     try {
       setLoading(true);
-      const response = await axios.get('/api/loans');
+      const response = await api.get('/loans');
       setLoans(response.data);
       setFilteredLoans(response.data);
     } catch (error) {
@@ -129,7 +129,7 @@ const LoanRequestForm = ({ loan, onClose }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/requests', {
+      await api.post('/requests', {
         customerId: user.id,
         loanId: loan._id,
         ...formData,
