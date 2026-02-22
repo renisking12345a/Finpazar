@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useAuth } from '../context/AuthContext';
 import './LoansPage.css';
 
 const LoansPage = () => {
@@ -101,6 +102,7 @@ const LoansPage = () => {
 };
 
 const LoanRequestForm = ({ loan, onClose }) => {
+  const { user } = useAuth();
   const [formData, setFormData] = useState({
     requestedAmount: loan.minAmount,
     requestedDuration: loan.minDuration,
@@ -128,6 +130,7 @@ const LoanRequestForm = ({ loan, onClose }) => {
     e.preventDefault();
     try {
       await axios.post('/api/requests', {
+        customerId: user.id,
         loanId: loan._id,
         ...formData,
         requestedAmount: parseInt(formData.requestedAmount),

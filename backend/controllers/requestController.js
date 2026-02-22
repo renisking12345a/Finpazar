@@ -3,7 +3,7 @@ const Loan = require('../models/Loan');
 
 const createRequest = async (req, res) => {
   try {
-    const { loanId, requestedAmount, requestedDuration, firstName, lastName, email, phone, city, address, income } = req.body;
+    const { customerId, loanId, requestedAmount, requestedDuration, firstName, lastName, email, phone, city, address, income } = req.body;
 
     const loan = await Loan.findById(loanId);
     if (!loan) {
@@ -20,7 +20,7 @@ const createRequest = async (req, res) => {
 
     const loanRequest = new LoanRequest({
       loanId,
-      customerId: req.user?.id,
+      customerId,
       requestedAmount,
       requestedDuration,
       firstName,
