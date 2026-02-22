@@ -1,0 +1,18 @@
+{
+  "name": "finpazar",
+  "version": "1.0.0",
+  "description": "Loan marketplace platform for Macedonia",
+  "main": "backend/server.js",
+  "scripts": {
+    "install-all": "npm install --prefix backend && npm install --prefix frontend",
+    "dev": "concurrently \"npm --prefix backend run dev\" \"npm --prefix frontend start\"",
+    "start": "concurrently \"npm --prefix backend start\" \"npm --prefix frontend start\"",
+    "seed": "npm --prefix backend run seed"
+  },
+  "keywords": ["loans", "marketplace", "macedonia"],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "concurrently": "^7.6.0"
+  }
+}
