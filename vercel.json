@@ -1,6 +1,7 @@
 {
-  "version": 2,
   "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/build"
+  "outputDirectory": "frontend/build",
+  "ignoreCommand": "git diff --quiet $VERCEL_GIT_PREVIOUS_COMMIT $VERCEL_GIT_COMMIT -- frontend ."
 }
+
 
