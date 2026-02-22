@@ -4,12 +4,10 @@
   "framework": "create-react-app",
   "rewrites": [
     {
-      "source": "/api/:path*",
-      "destination": "https://web-production-ad6f2.up.railway.app/api/:path*"
-    },
-    {
-      "source": "/:path*",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
 }
+
+
